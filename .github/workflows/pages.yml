@@ -1,0 +1,65 @@
+# Publishes the slides to GitHub Pages on every push to main.
+# It also builds deck.pdf and deck.mp4 from the slides and publishes them alongside:
+#   https://<user>.github.io/<repo>/           the live deck
+#   https://<user>.github.io/<repo>/deck.pdf   one page per slide
+#   https://<user>.github.io/<repo>/deck.mp4   recorded walkthrough
+#
+# One-time setup: repo Settings → Pages → Build and deployment → Source: "GitHub Actions".
+
+name: Publish slides
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright, Chromium and ffmpeg
+        run: |
+          npm install --no-save playwright@1.56.0
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y ffmpeg
+
+      - name: Export PDF
+        run: node export-pdf.mjs
+
+      - name: Record MP4
+        run: node record.mjs
+
+      - name: Collect site files
+        run: |
+          mkdir _site
+          cp index.html deck.pdf deck.mp4 _site/
+          touch _site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
