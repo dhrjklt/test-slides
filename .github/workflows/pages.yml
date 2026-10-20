@@ -36,6 +36,7 @@ jobs:
         run: |
           npm install --no-save playwright@1.56.0
           npx playwright install --with-deps chromium
+          npx playwright install ffmpeg
           sudo apt-get install -y ffmpeg
 
       - name: Export PDF
@@ -46,8 +47,9 @@ jobs:
 
       - name: Collect site files
         run: |
-          mkdir _site
+          mkdir -p _site/examples
           cp index.html deck.pdf deck.mp4 _site/
+          cp examples/*.html _site/examples/
           touch _site/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
