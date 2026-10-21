@@ -1,6 +1,6 @@
-# Self-hosted LLMs for Belle II computing
+# AI for Belle II computing & software
 
-A self-contained, animated 5-slide deck for the **KEK Software & Computing meeting, October 2026**, in one `index.html`. No build step; published with GitHub Pages. The original animated demo deck is kept in `examples/raw-data.html`.
+A self-contained, animated 16-slide deck (12 talk slides plus a 3-slide backup section and its divider) for the **KEK Software & Computing meeting, October 2026**, in one `index.html`. No build step; published with GitHub Pages. The original animated demo deck is kept in `examples/raw-data.html`.
 
 | URL | What |
 |---|---|
@@ -43,6 +43,12 @@ npx playwright install ffmpeg
 node export-pdf.mjs     # -> deck.pdf
 node record.mjs         # -> deck.webm, and deck.mp4 if ffmpeg is installed
 ```
+
+## Deck structure
+
+Talk: cover · roadmap · docs assistant (retrieval pipeline) · agentic operations assistant · more use cases · two live exchanges · we run our own LLMs · sharing the GPUs · one address, two copies · IITH collaboration · the GPUs are open · closing.
+
+Backup (after the closing slide): a divider, `B1` the hardware, `B2` the platform on k3s.
 
 ## Editing the deck
 
