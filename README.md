@@ -16,6 +16,7 @@ A self-contained, animated 16-slide deck (12 talk slides plus a 3-slide backup s
 - `←` / `PageUp` / `Backspace` — back
 - `Home` / `End` — first / last slide
 - `R` — replay the current slide's animation
+- `P` — pause / resume the animation (slides marked `data-pausable`, e.g. slide 3)
 - `F` — fullscreen
 - `N` — speaker-notes drawer (also `?notes`)
 - `?clean` — hide navigation and letterbox for recording or print
