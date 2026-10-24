@@ -1491,22 +1491,6 @@ h1 {
 }
 .mx-built b { font-weight: 600; color: var(--navy); }
 
-#s-travel .travel-grid {
-  display: grid; grid-template-columns: 1fr 1.4fr; gap: 34px;
-  margin-top: 30px; flex: 1; min-height: 0; align-items: stretch;
-}
-#s-travel .card { padding: 28px 30px 24px; justify-content: center; }
-#s-travel .card h3 { font-size: 30px; margin: 12px 0 12px; }
-#s-travel .card p { font-size: 20px; }
-#s-travel .tr-why {
-  margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--rule);
-  color: var(--navy);
-}
-#s-travel .card .chip { margin-top: 18px; padding-top: 0; color: var(--rag); }
-#s-travel .tr-table { display: flex; flex-direction: column; justify-content: center; }
-#s-travel .ptable td { padding: 18px 10px; font-size: 18px; }
-#s-travel .ptable td:first-child { white-space: nowrap; color: var(--muted); }
-
 /* ---------- slide 3: simplified flow ---------- */
 .flow4 {
   position: relative; display: grid;
@@ -1978,20 +1962,20 @@ h1 {
         <span class="chip">planned</span>
       </article>
       <article class="card rv">
-        <span class="tag">gbasf2 · for users · Quinn Campagna</span>
+        <span class="tag">gbasf2 · for users · Quinn Campagna &amp; Paul Gebeline</span>
         <h3>gb2_diagnostic --useAI</h3>
         <p>The gb2_diagnostic CLI users already run, with an AI explanation layered on.</p>
         <div class="mx rv"><span class="mx-k">Today</span><p>gb2_diagnostic checks failed jobs, jobs stuck waiting and failed downloads; the output is pasted into a user-support ticket for an expert to read.</p></div>
         <div class="mx ai rv"><span class="mx-k">With --useAI</span><p>The same output, explained in plain words, with the matching fix from the gbasf2 docs.</p></div>
         <p class="mx-built rv"><b>Built from</b> the docs assistant on slide 04, through the shared LLM service.</p>
-        <p class="mx-built rv"><b>In development</b> by the BNL team — planned to use the <b>KEK GPU resources for LLM inference</b>.</p>
+        <p class="mx-built rv"><b>In development</b> by the US team — planned to use the <b>KEK GPU resources for LLM inference</b>.</p>
         <span class="chip">in development</span>
       </article>
     </div>
     <aside class="notes">
       <p>Two planned tools, one per audience. The <b>data production expert shifter assistant</b> reuses the operations agent with new tools: it reads the data-production GitLab tickets, checks Rucio for the datasets they mention, and — once DiracX is in place — the jobs as well. Instead of reading each ticket and checking each system in turn, the expert shifter asks once and gets what needs attention.</p>
-      <p><b>gb2_diagnostic --useAI</b> (Quinn Campagna) starts from the existing gb2_diagnostic, which already runs the basic tests and checks failed jobs, long-waiting jobs and failed downloads. Today its output is meant to be pasted into a Computing User Support ticket. With --useAI the same output is explained in plain words and matched to the fix in the gbasf2 docs — so many users can solve it before an expert is needed.</p>
-      <p>gb2_diagnostic --useAI is <b>in development</b> by the BNL team; the plan is to use the KEK GPU resources for LLM inference. The shifter assistant is <b>planned</b> = scoped, not started.</p>
+      <p><b>gb2_diagnostic --useAI</b> (Quinn Campagna and Paul Gebeline) starts from the existing gb2_diagnostic, which already runs the basic tests and checks failed jobs, long-waiting jobs and failed downloads. Today its output is meant to be pasted into a Computing User Support ticket. With --useAI the same output is explained in plain words and matched to the fix in the gbasf2 docs — so many users can solve it before an expert is needed.</p>
+      <p>gb2_diagnostic --useAI is <b>in development</b> by the US team; the plan is to use the KEK GPU resources for LLM inference. The shifter assistant is <b>planned</b> = scoped, not started.</p>
     </aside>
   </section>
 
@@ -2002,7 +1986,7 @@ h1 {
       <span class="stamp">55th B2GM · KEK</span>
     </header>
     <h1>gb2_diagnostic with AI mode</h1>
-    <p class="sub">Example from the development version (BNL team): a job stuck because it asks for too much CPU time.</p>
+    <p class="sub">Example from the development version (US team): a job stuck because it asks for too much CPU time.</p>
 
     <div class="ua">
       <div class="ua-term rv" aria-label="Terminal running gb2_diagnostic with --useAI">
@@ -2031,7 +2015,7 @@ h1 {
     </div>
 
     <aside class="notes">
-      <p>What a user sees with --useAI — an example from the development version by the BNL team. Job 1517217 is stuck: it requests CPUTime=500,000, more than the maximum queue CPU time at 6 of the 7 sites with known limits, so it can hardly run anywhere.</p>
+      <p>What a user sees with --useAI — an example from the development version by the US team. Job 1517217 is stuck: it requests CPUTime=500,000, more than the maximum queue CPU time at 6 of the 7 sites with known limits, so it can hardly run anywhere.</p>
       <p>The diagnosis names the blocker and gives the fix straight from the gbasf2 docs (Setting the CPU time): cputime = 20 × the runtime on KEKCC in minutes, set with --cputime or --evtpersec, then kill the stuck job with gb2_job_kill and resubmit. Today the user would paste the raw diagnostic output into a user-support ticket and wait for an expert.</p>
       <p>The grey progress line in the terminal is added for the animation; the diagnosis box is the tool's output.</p>
     </aside>
@@ -2232,7 +2216,6 @@ h1 {
         <li class="rv"><b>B7</b><span>Follow-up questions — when the cache is reused, and when it misses.</span></li>
         <li class="rv"><b>B8</b><span>Future considerations — LangGraph, Deep Agents, OpenClaw and Hermes Agent compared.</span></li>
         <li class="rv"><b>B9</b><span>Exploring next — decision models, RAFT and GraphRAG.</span></li>
-        <li class="rv"><b>B10</b><span>The travel agent — the same code doing KEK office work.</span></li>
       </ul>
       <p class="backup-foot rv">Same numbers as the talk · speaker notes included</p>
     </div>
@@ -2839,42 +2822,6 @@ h1 {
     </aside>
   </section>
 
-  <!-- B10 · backup · the travel agent -->
-  <section class="slide" id="s-travel" data-anim="travel" data-dur="8000">
-    <header class="chrome">
-      <p class="kicker">B10 · Backup · beyond research</p>
-      <span class="stamp">55th B2GM · KEK</span>
-    </header>
-    <h1>The travel agent — office work, not physics</h1>
-    <p class="sub">A KEK-internal assistant, proposed by Matsuoka-san, that already helps with Belle II secretarial work.</p>
-    <div class="travel-grid">
-      <article class="card internal rv">
-        <span class="tag">KEK internal · proposed by Matsuoka-san</span>
-        <h3>What it does</h3>
-        <p>Answers questions on the KEK travel-expense rules, and works out distances and costs for reimbursement.</p>
-        <p class="tr-why">An LLM platform should not only serve research — this is the same machine doing everyday office work.</p>
-        <span class="chip">working</span>
-      </article>
-      <div class="tr-table rv">
-        <h2 class="ptable-title">Same code, different setup</h2>
-        <table class="ptable">
-          <thead>
-            <tr><th></th><th>Operations agent</th><th>Travel agent</th></tr>
-          </thead>
-          <tbody>
-            <tr class="rv"><td>Tools</td><td>five specialists</td><td>one — the docs search</td></tr>
-            <tr class="rv"><td>Knowledge</td><td>gbasf2 docs + live systems</td><td>KEK travel rules</td></tr>
-            <tr class="rv"><td>Users</td><td>shifters &amp; experts</td><td>Belle II secretaries</td></tr>
-            <tr class="rv on"><td>Code</td><td colspan="2"><b>the same codebase</b> — only the configuration differs</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <aside class="notes">
-      <p>The travel agent is the answer to "why should a physics lab run LLMs": it is a second deployment of the same codebase, with a single tool — query_docs, the docs search from slide 04 — over the KEK travel rules instead of gbasf2.</p>
-      <p>It came from a proposal by Matsuoka-san and is used for Belle II secretarial tasks. Answers are scoped to the asker's role: the chat sends the user's audience with each question and retrieval only searches the rules that apply to them.</p>
-    </aside>
-  </section>
 
 
 
@@ -3449,18 +3396,6 @@ h1 {
         await run.wait(200);
         await revealSeq(run, $$('.card', root), 300);
         await revealSeq(run, $$('.mx, .mx-built', root), 320);
-      });
-    },
-
-    travel(root) {
-      reset(root);
-      return sequence(root, async (run) => {
-        await run.wait(200);
-        $('.card', root).classList.add('in');
-        await run.wait(500);
-        $('.tr-table', root).classList.add('in');
-        await run.wait(300);
-        await revealSeq(run, $$('.ptable tbody tr', root), 340);
       });
     },
 
